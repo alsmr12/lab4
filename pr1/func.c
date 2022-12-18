@@ -7,11 +7,12 @@
 char *func(const char *str) {
     char *s = strdup(str);
     int s_len = strlen(s);
-    char *res = (char *)malloc((2 * (s_len + 1)) * sizeof(char));
+    char *res = (char *)malloc((2 * s_len + 1) * sizeof(char));
     int len = 0;
     char *word = strtok(s, " \t");
     int w_len = 0;
     while (word != NULL) {
+        printf("%s\n", word);
         w_len = strlen(word);
         if (w_len > 0) {
             memcpy(res + len, word, w_len * sizeof(char));

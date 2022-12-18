@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "func.h"
 #include <readline/readline.h>
 
+#include "func.h"
+
 int main() { 
-    char *input = readline("> ");	
-    char *input = "qw erty ui iop"; 
+    char *input = readline("> ");
     char *output;
     while (input != NULL) {
         printf("\"%s\"\n", input);

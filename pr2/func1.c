@@ -3,8 +3,6 @@
 #include <stddef.h>
 #include "func1.h"
 
-//static char *old;
-
 int my_strlen(const char *str) {
     int i = 0;
     while (str[i] != '\0') {
@@ -21,6 +19,7 @@ char *my_strtok(char *str, char *delim, int *q) {
 	    return NULL;
     }
     while (c == 0) {
+        // strchr
         for (i = 0; i < len_delim; i++) {
             if (str[*q] == delim[i]) c = 1;
 	}
@@ -51,19 +50,18 @@ char *my_strdup(const char *s) {
 }
 
 char *my_strncpy(char *dest, const char *src, size_t n) {
-        size_t i;
+    int i;
 	for (i = 0; i < n && src[i] != '\0'; i++) {
 		dest[i] = src[i];
 	}
         for (i; i < n; i++) {
                 dest[i] = '\0';
 	}
-
-        return dest;
+    return dest;
 }
 
 void *my_memcpy(void *dest, const void *src, size_t n) {
-	size_t i;
+	int i;
 	for (i = 0; i < n; i++) {
 		((char*)dest)[i] = ((char*)src)[i];
 	}

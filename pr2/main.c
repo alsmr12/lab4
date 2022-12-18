@@ -9,15 +9,17 @@ int main() {
     printf("> ");
     t = scanf("%80[^\n]", input);
     char *output;
-   // while (t != -1) {
+    while (t != -1) {
         printf("\"%s\"\n", input);
         output = func(input);
         printf("\"%s\"\n", output);
         free(input);
         free(output);
-//	input = (char *)calloc(81, sizeof(char));
-//	printf("> ");
-     //   t = scanf("%80[^\n]", input);
-  //  }
+	input = (char *)calloc(81, sizeof(char));
+    scanf("%*c");
+    printf("> ");
+    t = scanf("%80[^\n]", input);
+    }
+    free(input);
     return 0;
 }
