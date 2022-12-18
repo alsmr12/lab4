@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "func1.h"
 
 char *func(const char *str) {
     char *s = my_strdup(str);
     int s_len = my_strlen(s);
     char *res = (char *)calloc((2 * (s_len + 1)), sizeof(char));
-    int len = 0, q = 0; // q - для strtok
-    char *word = my_strtok(s, " \t", &q);
+    int len = 0;
+    char *word = my_strtok(s, " \t");
     int w_len = 0;
     while (word != NULL) {
         w_len = my_strlen(word);	
@@ -23,7 +24,7 @@ char *func(const char *str) {
                 ++len;
             }
         }
-        word = my_strtok(s, " \t", &q);
+        word = my_strtok(NULL, " \t");
     }
     free(s);
     if (len > 0) {

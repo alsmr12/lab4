@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+
 #include "func1.h"
 
-int my_strlen(const char *str) {
+size_t my_strlen(const char *str) {
     int i = 0;
     while (str[i] != '\0') {
         i = i + 1;
@@ -11,7 +12,37 @@ int my_strlen(const char *str) {
     return i;
 }
 
-char *my_strtok(char *str, char *delim, int *q) {    
+char *my_strchr(const char *s, int c) {
+    int q = 0;	
+    while ((int)s[q] != c) {
+	if (s[q] == '\0') break;
+	++q;
+    }
+    if ((s[q] != '\0') || ((char)c == '\0')) {
+	char *res = (char *)s + q;
+	return res;
+    }
+    else return NULL;
+}
+
+char *my_strtok(char *str, const char *delim) {
+    static char *ptr;
+    if (str != NULL) {
+	    ptr = str;
+	    while ((my_strchr(delim, *ptr) != NULL) && (*ptr != '\0')) ++ptr;  
+    } 
+    if (*ptr == '\0')
+        return NULL;
+    str = ptr;
+    while ((*ptr) && (!my_strchr(delim, *ptr)))
+        ++ptr;
+    if (*ptr) *ptr++ = '\0';
+    return str;
+}
+
+/*char *my_strtok(char *str, char *delim) {
+    static char *ptr;
+    if (str != NULL) ptr = str;    
     int len_delim = my_strlen(delim);
     int y = *q;
     int c = 0, i;
@@ -38,7 +69,7 @@ char *my_strtok(char *str, char *delim, int *q) {
 	    --(*q);
     }
     return str + y; 
-}
+}*/
 
 char *my_strdup(const char *s) {
 	int len_s = my_strlen(s);
