@@ -4,6 +4,35 @@
 
 #include "func1.h"
 
+char *my_readline(const char *prompt) {
+    printf("%s", prompt);
+    char buf[81] = {0};
+    char *str = NULL;
+    int len = 0, n;
+    do {
+        n = scanf("%80[^\n]", buf);
+        if (n == -1) {
+            return NULL;
+        }
+        else if (n > 0) {
+            int len_buf = my_strlen(buf);
+            str = (char *)realloc(str, (len + len_buf + 1) * sizeof(char));
+            my_memcpy(str + len, buf, len + len_buf);
+            len = len + len_buf;
+        }
+        else {
+            scanf("%*c");
+        }
+    } while (n > 0);
+    if (len > 0) {
+        str[len] = '\0';
+    }
+    else {
+        str = (char *)calloc(1, sizeof(char));
+    }
+    return str;
+}
+
 size_t my_strlen(const char *str) {
     int i = 0;
     while (str[i] != '\0') {
@@ -40,37 +69,6 @@ char *my_strtok(char *str, const char *delim) {
     return str;
 }
 
-/*char *my_strtok(char *str, char *delim) {
-    static char *ptr;
-    if (str != NULL) ptr = str;    
-    int len_delim = my_strlen(delim);
-    int y = *q;
-    int c = 0, i;
-    if (str[*q] == '\0') {
-	    return NULL;
-    }
-    while (c == 0) {
-        // strchr
-        for (i = 0; i < len_delim; i++) {
-            if (str[*q] == delim[i]) c = 1;
-	}
-	if (c == 1) str[*q] = '\0';
-	++(*q);
-	if (str[*q] == '\0') c = 1;
-    }
-    if (str[*q] != '\0') {
-	    while (c == 1) {
-		c = 0;    
-	        for (i = 0; i < len_delim; i++) {
-                    if (str[*q] == delim[i]) c = 1;
-		}
-		++(*q);
-	    }
-	    --(*q);
-    }
-    return str + y; 
-}*/
-
 char *my_strdup(const char *s) {
 	int len_s = my_strlen(s);
 	char *new_s = (char *)malloc((len_s + 1) * sizeof(char));
@@ -80,7 +78,7 @@ char *my_strdup(const char *s) {
 	return new_s;
 }
 
-char *my_strncpy(char *dest, const char *src, size_t n) {
+/*char *my_strncpy(char *dest, const char *src, size_t n) {
     int i;
 	for (i = 0; i < n && src[i] != '\0'; i++) {
 		dest[i] = src[i];
@@ -89,7 +87,7 @@ char *my_strncpy(char *dest, const char *src, size_t n) {
                 dest[i] = '\0';
 	}
     return dest;
-}
+} */
 
 void *my_memcpy(void *dest, const void *src, size_t n) {
 	int i;
@@ -98,4 +96,3 @@ void *my_memcpy(void *dest, const void *src, size_t n) {
 	}
 	return dest;
 }
-
