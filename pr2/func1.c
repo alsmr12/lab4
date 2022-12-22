@@ -6,30 +6,24 @@
 
 char *my_readline(const char *prompt) {
     printf("%s", prompt);
-    char buf[81] = {0};
+    char buf[81]; 
     char *str = NULL;
-    int len = 0, n;
+    int len = 0, t;
     do {
-        n = scanf("%80[^\n]", buf);
-        if (n == -1) {
+        t = scanf("%80[^\n]", buf);
+        if (t == -1) {
             return NULL;
         }
-        else if (n > 0) {
+        else if (t == 0) scanf("%*c");
+        else {
             int len_buf = my_strlen(buf);
             str = (char *)realloc(str, (len + len_buf + 1) * sizeof(char));
             my_memcpy(str + len, buf, len + len_buf);
             len = len + len_buf;
         }
-        else {
-            scanf("%*c");
-        }
-    } while (n > 0);
-    if (len > 0) {
-        str[len] = '\0';
-    }
-    else {
-        str = (char *)calloc(1, sizeof(char));
-    }
+    } while (t > 0);
+    if (len == 0) str = (char *)malloc(1 * sizeof(char));
+    str[len] = '\0';
     return str;
 }
 
@@ -70,24 +64,11 @@ char *my_strtok(char *str, const char *delim) {
 }
 
 char *my_strdup(const char *s) {
-	int len_s = my_strlen(s);
-	char *new_s = (char *)malloc((len_s + 1) * sizeof(char));
-	for (int i = 0; i <= len_s; i++) {
-		new_s[i] = s[i];
-	}
-	return new_s;
+    int len_s = my_strlen(s);
+    char *new_s = (char *)malloc((len_s + 1) * sizeof(char));
+    my_memcpy(new_s, s, len_s + 1);
+    return new_s;
 }
-
-/*char *my_strncpy(char *dest, const char *src, size_t n) {
-    int i;
-	for (i = 0; i < n && src[i] != '\0'; i++) {
-		dest[i] = src[i];
-	}
-        for (i; i < n; i++) {
-                dest[i] = '\0';
-	}
-    return dest;
-} */
 
 void *my_memcpy(void *dest, const void *src, size_t n) {
 	int i;
