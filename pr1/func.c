@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "func.h"
 #include <readline/readline.h>
+
+#include "func.h"
 
 char *func(const char *str) {
     char *s = strdup(str);
