@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "func1.h"
+#include "str.h"
 
 char *func(const char *str) {
     char *s = my_strdup(str);

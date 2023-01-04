@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "func.h"
-#include "func1.h"
+#include "str.h"
 
 int main() {
     char *input = my_readline("> ");
