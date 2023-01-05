@@ -1,5 +1,5 @@
+#ifndef my_strfunc_h
 #define my_strfunc_h
-#ifdef my_strfunc_h
 
 size_t my_strlen(const char *str);
 char *my_readline (const char *prompt);
